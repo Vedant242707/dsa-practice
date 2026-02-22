@@ -17,26 +17,22 @@ class Solution {
         return ans;
     }
 
-    int findindex(int[] arr, int target, boolean firstposition) {
-
+    public int findindex(int[] arr, int target, boolean firstposition) {
         int ans = -1;
-        int start = 0; 
-        int end = arr.length-1;
-
-        while(start <= end) {
-            int mid = start + (end-start)/2;
-
+        int start = 0;
+        int end = arr.length - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2; // avoids integer overflow
             if (target < arr[mid]) {
-                end = mid-1;
+                end = mid - 1;       // search left half
             } else if (target > arr[mid]) {
-                start = mid+1;
-            } else if (target == arr[mid]) {
-                ans = mid;
-
+                start = mid + 1;     // search right half
+            } else {
+                ans = mid;           // target found, record index
                 if (firstposition) {
-                    end = mid-1;
+                    end = mid - 1;   // keep searching left for first occurrence
                 } else {
-                    start = mid+1;
+                    start = mid + 1; // keep searching right for last occurrence
                 }
             }
         }
